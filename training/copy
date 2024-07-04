@@ -1,0 +1,30 @@
+public class Employee
+{
+    public int Id{get;set;}
+    public string Name{get;set;}
+    public string Address{get;set;}
+}
+public interface IEmployeeComponent 
+{
+    void AddNewEmployee(int id,string name,string address);
+}
+
+public static class EmployeeFactory
+{
+    public static IEmployeeComponent CreateComponent()=>new EmployeeComponent();
+}
+
+internal class EmployeeComponent : IEmployeeComponent
+{
+    public void AddNewEmployee(int id,string name,string address);
+    {
+        Console.WriteLine("Employee Added");
+        var emp = createEmployee(id,name,address);
+        //code to add the Employee according to the business requrirement
+        //todo: Using Json Serialization , U should add the Employee to a Json file and name should be empname.json
+    }
+    private Employee createEmployee(int id,string name,string address)
+    {
+        return new Employee{Id=id,Name=name,Address=address};
+}
+}
