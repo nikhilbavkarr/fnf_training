@@ -28,3 +28,22 @@ internal class EmployeeComponent : IEmployeeComponent
         return new Employee{Id=id,Name=name,Address=address};
 }
 }
+
+
+
+//DLL
+
+
+i c emp
+{
+    static void Main(string[] args)
+    {
+        //simpleExample();
+        usingEmployeeComponent();
+    }
+    private static void usingEmployeeComponent()
+    {
+        var EmpComponent=EmployeeFactory.CreateComponent();
+        EmpComponent.AddNewEmployee(123,"Nikhil","Bangalore");
+    }
+}
