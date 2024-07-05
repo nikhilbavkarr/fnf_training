@@ -47,3 +47,51 @@ i c emp
         EmpComponent.AddNewEmployee(123,"Nikhil","Bangalore");
     }
 }
+
+
+
+
+
+//operatoroverloading
+
+using System;
+
+class employee
+{
+    public int empid{get ; set;}
+    public string empname{get; set;}
+    public int empsalary{get; set;}
+    public static employee operator +(employee lhs, employee rhs)
+    {
+        lhs.empsalary  + = rhs;
+        return lhs;
+    }
+    public static employee operator -(employee lhs, employee rhs)
+    {
+        lhs.empsalary  - = rhs;
+        return lhs;
+    }
+    public static explicit operator employee(cst  rhs){
+        var emp=new employee{empid = rhs.cstid,empname=rhs.cstname,empsalary=rhs.basevalue};
+        return emp;
+    }
+}
+class cst{
+    public int cstid{get ; set;}
+    public string cstname{get; set;}
+    public int basevalue{get; set;}
+}
+internal class operatoroverloading
+{
+    static void Main(string[] args)
+    {
+        employee emp=new employee{ empid=11,empname="Nikhl",empsalary=45000};
+        emp + = 5000;
+        Console.WriteLine("added salary "+ emp.empsalary);
+        emp - = 5000;
+        Console.WriteLine("deducted salary "+ emp.empsalary);
+
+        employee emp2 = (employee) new cst {cstid =2,basevalue=40000,cstname="Nikhil"};
+        Console.WriteLine("the name "+ emp2.empname);
+    }
+}
