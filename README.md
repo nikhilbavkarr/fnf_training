@@ -1,14 +1,5 @@
-
-
-Day 1 : Basics, Enum , Class And Object , Array
-
-
-
-
-
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public class BookSorter
 {
@@ -31,13 +22,22 @@ public class BookSorter
         }
         
         // Sort the entries based on the first author's name and then book title
-        var sortedEntries = bookEntries
-            .OrderBy(e => e.Author)
-            .ThenBy(e => e.Title)
-            .ToList();
+        bookEntries.Sort((e1, e2) =>
+        {
+            int authorComparison = string.Compare(e1.Author, e2.Author, StringComparison.Ordinal);
+            if (authorComparison != 0)
+            {
+                return authorComparison;
+            }
+            return string.Compare(e1.Title, e2.Title, StringComparison.Ordinal);
+        });
         
         // Extract the sorted titles
-        var sortedTitles = sortedEntries.Select(e => e.Title).ToList();
+        var sortedTitles = new List<string>();
+        foreach (var entry in bookEntries)
+        {
+            sortedTitles.Add(entry.Title);
+        }
         
         return sortedTitles;
     }
