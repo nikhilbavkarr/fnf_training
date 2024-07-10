@@ -6,70 +6,69 @@ Day 1 : Basics, Enum , Class And Object , Array
 
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-public class BookSorter {
-
-    public static List<String> SortTitles(List<String> books) {
-        List<BookEntry> entries = new ArrayList<>();
+public class BookSorter
+{
+    public static List<string> SortTitles(List<string> books)
+    {
+        // Parse the book titles and authors
+        var bookEntries = new List<BookEntry>();
         
-        for (String book : books) {
-            // Extract book title and author from the string
-            String[] parts = book.split(" by ");
-            if (parts.length < 2) continue; // Skip malformed entries
+        foreach (var book in books)
+        {
+            // Extract book title and author(s) from the string
+            var parts = book.Split(" by ");
+            if (parts.Length < 2) continue; // Skip malformed entries
             
-            String title = parts[0].replace("\"", "").trim();
-            String authors = parts[1];
-            String[] authorsArray = authors.split(" and ");
-            String firstAuthor = authorsArray[0].trim();
+            var title = parts[0].Trim(' ', '"');
+            var authors = parts[1];
+            var firstAuthor = authors.Split(" and ")[0].Trim();
             
-            entries.add(new BookEntry(title, firstAuthor));
+            bookEntries.Add(new BookEntry(title, firstAuthor));
         }
         
         // Sort the entries based on the first author's name and then book title
-        Collections.sort(entries, new Comparator<BookEntry>() {
-            @Override
-            public int compare(BookEntry e1, BookEntry e2) {
-                int authorComparison = e1.author.compareTo(e2.author);
-                if (authorComparison != 0) {
-                    return authorComparison;
-                } else {
-                    return e1.title.compareTo(e2.title);
-                }
-            }
-        });
+        var sortedEntries = bookEntries
+            .OrderBy(e => e.Author)
+            .ThenBy(e => e.Title)
+            .ToList();
         
         // Extract the sorted titles
-        List<String> sortedTitles = new ArrayList<>();
-        for (BookEntry entry : entries) {
-            sortedTitles.add(entry.title);
-        }
+        var sortedTitles = sortedEntries.Select(e => e.Title).ToList();
         
         return sortedTitles;
     }
-    
-    // Helper class to store book title and the first author's name
-    private static class BookEntry {
-        String title;
-        String author;
 
-        BookEntry(String title, String author) {
-            this.title = title;
-            this.author = author;
+    // Helper class to store book title and the first author's name
+    private class BookEntry
+    {
+        public string Title { get; }
+        public string Author { get; }
+
+        public BookEntry(string title, string author)
+        {
+            Title = title;
+            Author = author;
         }
     }
 
-    public static void main(String[] args) {
+    public static void Main()
+    {
         // Sample test
-        List<String> books = List.of(
+        var books = new List<string>
+        {
             "\"The Canterbury Tales\" by Chaucer",
             "\"Algorithms\" by Sedgewick",
             "\"The C Programming Language\" by Kernighan and Ritchie"
-        );
-        List<String> sortedTitles = SortTitles(books);
-        System.out.println(sortedTitles);
+        };
+        
+        var sortedTitles = SortTitles(books);
+        foreach (var title in sortedTitles)
+        {
+            Console.WriteLine(title);
+        }
     }
 }
