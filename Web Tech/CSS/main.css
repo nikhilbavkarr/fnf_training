@@ -1,0 +1,122 @@
+body {
+    background-color: silver;
+    color: black;
+    font-size: 12px;
+}
+
+section {
+    width: 45%;
+    display: inline-block;
+    border: 2px solid black;
+    margin: 10px;
+    vertical-align: top;
+}
+
+header {
+    background-color: lightblue;
+    color: black;
+    padding: 2px;
+    vertical-align: bottom;
+}
+
+footer {
+    font-size: 1cm;
+    color: red;
+    font-style: italic;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    vertical-align: bottom;
+}
+
+ul {
+    list-style-type: square;
+}
+
+li {
+    padding: 2px;
+    background-color: aqua;
+
+}
+
+li:hover {
+    color: red;
+}
+
+a {
+    background-color: aqua;
+    margin: 5px;
+    padding: 5px;
+}
+
+a:hover {
+    color: magenta;
+}
+
+nav {
+    text-align: center;
+    padding: auto;
+    margin: auto;
+}
+
+.jumbo {
+    font-size: 25pt;
+    padding: 1px;
+    text-align: center;
+}
+
+nav>ul {
+    list-style-type: none;
+}
+
+nav>ul>li {
+    display: inline-block;
+    padding: auto;
+    width: auto;
+}
+
+table{
+    width: 100%;
+}
+tr,td{
+    padding: auto;
+}
+
+tr:nth-child(even){
+    background-color: aquamarine;
+}
+tr:nth-child(odd){
+    background-color: aliceblue;
+}
+
+.postcard{
+    border: 2px solid black;
+    border-radius: 5px;
+    display: inline-block;
+    box-shadow: 2px 2px 2px 4px lightslategray;
+}
+
+.rounded{
+    border-radius: 50%;
+    float: right;
+    width: 45%;
+}
+
+.polaroid{
+    width: 50%;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 lightgrey;
+    margin-bottom: 2px;
+
+}
+.row{
+    text-align: left;
+    vertical-align: top;
+    width: 100%;
+    border: 2px solid black;
+    padding: 20px;
+    margin: 20px;
+}
+.mirror{
+    -webkit-box-reflect: below;
+}

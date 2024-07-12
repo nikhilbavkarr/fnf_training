@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMPLOYEEE MANAGEMENT SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+     rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        nav{
+            padding: 5px;
+            background-color: silver;
+        }
+        h1,ul{
+            color: blueviolet;
+             align-content: center;
+        }
+        li{
+            display: inline-block;
+            padding: 3px;
+        }
+        section{
+            width:45%;
+            padding: 3px;
+            margin: 5px;
+            display: inline-block;
+        }
+        table{
+            border :2px solid black;
+        }
+    </style>
+    <script src="./Ex09Employee.js"></script>
+    <script>
+        const repo = new EmployeeRepo();
+        function populateTable(data){
+        //const data = repo.getAllEmployees();
+        let header = `<tr>
+                <th>EmpId</th>
+                <th>EmpName</th>
+                <th>EmpAddress</th>
+                <th>EmpSalary</th>
+                <th>Options</th>
+            </tr>`
+        const table = document.querySelector('table');
+        table.innerHTML = header;    
+        for (const emp of data) {
+            let row = `<tr>
+                        <td>${emp.empId}</td>
+                        <td>${emp.empName}</td>
+                        <td>${emp.empAddress}</td>
+                        <td>${emp.empSalary}</td>
+                        <td>
+                            <a href="#" selectedId="${emp.empId}" onclick="onUpdateRecord(this)">Edit</a>  
+                        </td>
+                        </tr>`
+              table.innerHTML += row;          
+        }
+    }
+        function onAddRecord(){
+            const id = document.getElementById("txtId").value;
+            const name = document.getElementById("txtName").value;
+            const address = document.getElementById("txtAddress").value;
+            const salary = document.getElementById("txtSalary").value;
+            const emp=new Employee(id,name,address,salary);
+            repo.addNewEmployee(emp);
+            alert('Employee added successfully')
+            hide(document,querySelectorAll('section'));
+        }
+        function onUpdateRecord(ele){
+            const id=ele.getAttribute('selectedId');
+            const foundRec=repo.getAllEmployees().find((e)=>e.empId==id);
+            document.getElementById("txtupId").value=foundRec.empId;
+            document.getElementById("txtupName").value=foundRec.empName;
+            document.getElementById("txtupAddress").value=foundRec.empAddress;
+            document.getElementById("txtupSalary").value=foundRec.empSalary;
+            hide(document.querySelectorAll('section'));
+            show('secUpdate')
+        }
+        function onUpdatedRecord(){
+            let id = document.getElementById("txtupId").value;
+            let name = document.getElementById("txtupName").value;
+            let address = document.getElementById("txtupAddress").value;
+            let salary = document.getElementById("txtupSalary").value;
+            let emp=new Employee(id,name,address,salary);
+            repo.updateEmployees(emp.empId,emp);
+            alert('Employee updated successfully')
+            hide(document,querySelectorAll('section'));
+            show(secAdd)
+        }
+        function mapEvents(){
+            document.getElementById("all").addEventListener("click",()=>{
+                hide(document.querySelectorAll('section'));
+                show("secDisplay")
+                populateTable(repo.getAllEmployees());
+            });
+            document.getElementById("add").addEventListener("click",()=>{
+                hide(document.querySelectorAll('section'));
+                show("secAdd")
+            });
+            document.getElementById("update").addEventListener("click",()=>{
+                hide(document.querySelectorAll('section'));
+                show("secUpdate")
+            });
+            document.getElementById("btnAdd").addEventListener("click",onAddRecord);
+            
+           document.getElementById("btnUpdate").addEventListener("click",onUpdatedRecord);
+        }
+
+        function onTextChange(){
+            const text = document.getElementById('txtSearch').value;
+            const records = repo.getAllEmployees();
+            const filtered = records.filter((ex)=>ex.empName.includes(text));
+        populateTable(filtered);
+        }
+        window.addEventListener('load',function(){
+           // hideElements(...document.querySelectorAll('section'));
+            hide(document.querySelectorAll('section'));
+            //show("secAdd")
+            mapEvents()
+        });
+    </script>
+</head>
+<body>
+    <h1>Employee Management System</h1>
+    <hr>
+    <nav class="col-md-6">
+        <ul style="list-style-type: none;">
+            <li class="col-md-3"><a id="all" href="#">All Employees</a></li>
+            <li class="col-md-3"><a id="add" href="#">Add Employees</a></li>
+            <li class="col-md-3"><a id="update" href="#">Update Employees</a></li>
+        </ul>
+    </nav>
+    <section id = "secDisplay">
+        <h2>All EMployees</h2>
+        <hr>
+        <input type="search" onchange="onTextChange()" id="txtSearch" placeholder="search by name">
+        <table>
+            <tr>
+                <th>EmpId</th>
+                <th>EmpName</th>
+                <th>empAddress</th>
+                <th>empSalary</th>
+                <th>Options</th>
+            </tr>
+        </table>
+    </section>
+    <section id="secAdd">
+        <h2>Add New Employees</h2>
+        <hr>
+        <div>
+            <p>Enter the Id : <input type="text" class="Form" id="txtId"></p>
+            <p>Enter the Name : <input type="text" class="Form" id="txtName"></p>
+            <p>Enter the Address : <input type="text" class="Form" id="txtAddress"></p>
+            <p>Enter the Salary : <input type="text" class="Form" id="txtSalary"></p>
+            <p><button id="btnAdd" class="btn btn-success mg-4">Add Employee</button>
+            <button class="btn btn-info">Cancel</button></p>
+        </div>
+    </section>
+    <section id="secUpdate">
+        <h2>Update Employees</h2>
+        <hr>
+        <div>
+            <p>Enter New Id : <input type="text" class="col-control" id="txtupId" disabled></p>
+            <p>Enter New Name : <input type="text" class="col-control" id="txtupName"></p>
+            <p>Enter New Address : <input type="text" class="col-control" id="txtupAddress"></p>
+            <p>Enter New Salary : <input type="text" class="col-control" id="txtupSalary"></p>
+            <p><button id="btnUpdate" class="btn btn-success mg-4">Update Employee</button>
+            <button class="btn btn-info">Cancel</button></p>
+        </div>
+    </section>
+</body>
+</html>
