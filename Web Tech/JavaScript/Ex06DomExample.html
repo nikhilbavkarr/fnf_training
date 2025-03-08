@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Example</title>
+<script src="../JavaScript/Ex05Functions.js"></script>
+<script src="../JavaScript/Ex07AddingElements.js"></script>
+
+    <script>
+        function onClick(){
+            let name=document.getElementById('txtName').value;
+            alert(name);
+            document.getElementById('spDisplay').innerText="The name is " + name;
+        }
+        function onGetResult(){
+            //get the value
+            //switch cases
+            //on each case,call the appropriate function
+            //set the result
+
+            const v1=parseFloat(document.getElementById("txtfirstvalue").value);
+            const v2=parseFloat(document.getElementById("txtsecondvalue").value);
+            const op=document.getElementById("op").value;
+            const p=document.getElementById("pResult");
+            switch(op){
+                case "Add": p.innerText = AddFunc(v1,v2);
+                break;
+                case "Sub": p.innerText = SubFunc(v1,v2);
+                break;
+                case "Mul": p.innerText = MulFunc(v1,v2);
+                break;
+                case "Div": p.innerText = DivFunc(v1,v2);
+                break;
+                default:
+                alert("unrecongnized choice");
+                break;
+            }
+
+        }
+        function deleteItem(item){
+            removeItem(item);
+            populateItem();
+        }
+        function populateItem(){
+            let items= GetAllItems();
+            let ul=document.getElementById("lstItems");
+            //let ul =document.querySelector('div:nth-child(3) > p > p:nth-child(1) > button');
+            ul.innerHTML="";//reset it to blank;
+            for(const item of items){
+                let line = `<li>${item}<a href="#" onclick="deleteItem('${item}')"> X </a></li>`
+                ul.innerHTML +=line;
+            }
+        }
+        function onAddItem(){
+            //get the value to add.
+            const item =document.getElementById("txtItem").value;
+           //const item =document.querySelector('div:nth-child')
+            //call the addToCart func
+            addItem(item);
+            populateItem();
+        }
+    </script>
+    <style>
+        div{
+            border: 2px solid blueviolet;
+            box-shadow: 2px 2px 5px 3px black;
+            width: fit-content;
+            margin: 10px;
+            padding: 5px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        a{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <h1> Example of Dom Usage </h1>
+    <hr/>
+    <p>Enter your Name :
+        <input id="txtName" placeholder="Enter UR Name :"/>
+        <button onclick="onClick()">Sumbit</button>
+    </p>
+    <p style="color: darkcyan">
+        <span id="spDisplay"></span>
+    </p>
+</div>
+<div>
+    <h1> Math Calculator </h1>
+    <hr/>
+    <p>
+        Enter the 1st value :
+        <input type="number" id="txtfirstvalue" placeholder="Enter 1st number">
+    </p>
+    <p>
+        Select the Option :
+        <select id="op">
+            <option>Select</option>
+            <option>Add</option>
+            <option>Sub</option>
+            <option>Mul</option>
+            <option>Div</option>
+        </select>
+    </p>
+    <p>
+        Enter the 2st value :
+        <input type="number" id="txtsecondvalue" placeholder="Enter 2st number">
+    </p>
+    <p>
+        <button onclick="onGetResult()">Result</button>
+    </p>
+    <p id="pResult" style="border: 2px solid ; color: green;">
+    </p>
+</div>
+<div>
+    <h1> Adding Element to Array</h1>
+    <hr/>
+    <p>
+        Enter the Item to add:
+        <input placeholder="Enter the item name :" id="txtItem"/>
+        <button onclick="onAddItem()">Add to Cart</button>
+    </p>
+    <p>
+        List of Elements: <br>
+        <ul id="lstItems"></ul>
+    </p>
+</div>
+</body>
+</html>

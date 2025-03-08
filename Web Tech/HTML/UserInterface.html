@@ -1,0 +1,44 @@
+<!--  <script src="../JavaScript/Ex01Basics.js"></script> 
+<script src="../JavaScript/Ex02Variables.js"></script>  
+<script src="../JavaScript/Ex03Calculator.js"></script> 
+<script src="../JavaScript/Ex04Arrays.js"></script> -->
+<!-- <script src="../JavaScript/Ex05Functions.js"></script>  
+
+<script src="../JavaScript/Ex08ClassAndObjects.js"></script> -->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sets</title>
+    <script src="../JavaScript/Ex11DataStructures.js"></script>
+    <script>
+        let data = setExample();
+        window.addEventListener("load",function(){
+            const ul=document.getElementById("1stitem")
+            for(const iterator of data.values()){
+                ul.innerHTML +=`${iterator}`
+            }
+        });
+    </script> 
+</head>
+<body>
+    <div style="display: block;">
+        <p>
+            <ul id="1stitem" >
+
+            </ul>
+        </p>
+    </div>
+</body>
+</html>
+
+
+
+

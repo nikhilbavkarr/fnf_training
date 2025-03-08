@@ -1,0 +1,167 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./Ex09Employee.js"></script>
+    <title>Document</title>
+    <style>
+        input{
+            background-color: aqua;
+            color: blue;
+            padding: 10px;
+            min-width:200px ;
+            border-radius: 5px;
+        }
+        button{
+            color:white;
+            min-height: 50px;
+            border-radius: 10px;
+            background-color: gray;
+            padding: 10px;
+            width: 100px;
+        }
+    </style>
+    <script>
+        function register(){
+            let id=document.getElementById('txtId').value;
+            let name=document.getElementById('txtName').value;
+            let address=document.getElementById('txtAddress').value;
+            let salary=document.getElementById('txtSalary').value;
+            let emp= new Employee(id,name,address,salary);
+            let json = JSON.stringify(emp);
+            document.querySelector("span").innerText=json;
+        }
+
+        window.addEventListener("load",function(){
+            let value=localStorage.getItem("emp");
+            if(value == null){
+                alert("No Data is stored")
+            }
+            else{
+                let emp =JSON.parse(value);
+                document.getElementById('txtId').value=emp.empId;
+                document.getElementById('txtName').value=emp.empName;
+                document.getElementById('txtAddress').value=emp.empAddress;
+                document.getElementById('txtSalary').value=emp.empSalary;
+            }
+            let btn = document.querySelector("button");
+            btn.addEventListener("click",register);
+        })
+    </script>
+</head>
+
+<body>
+    <div>
+        <h2> Employee Registration From</h2>
+        <hr>
+        <p>
+            Enter your empID :
+            <input type="number" id="txtId" placeholder="Enter your empID">
+        </p>
+        <p>
+            Enter your Name :
+            <input type="text" id="txtName" placeholder="Enter your name">>
+        </p>
+        <p>
+            Enter your Address :
+            <input type="text" id="txtAddress" placeholder="Enter your Address">
+        </p>
+        <p>
+            Enter your Salary :
+            <input type="number" id="txtSalary" placeholder="Enter your salary">
+        </p>
+        <p>
+            <button>Register</button>
+        </p>
+    </div>
+    <div>
+        <span></span>
+    </div>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration Form</title>
+    <script src="./Ex09Employee.js"></script>
+    <style>
+        input{
+            background-color: aqua;
+            color: blue;
+            padding: 10px;
+            min-width:200px ;
+            border-radius: 5px;
+        }
+        button{
+            color:white;
+            min-height: 50px;
+            border-radius: 10px;
+            background-color: gray;
+            padding: 10px;
+            width: 100px;
+        }
+ 
+    </style>
+    <script>
+        function register(){
+            let id = document.getElementById('txtId').value;
+            let name = document.getElementById('txtName').value;
+            let address = document.getElementById('txtAddress').value;
+            let salary = document.getElementById('txtSalary').value;
+            let emp= new Employee(id,name,address,salary);
+            let json=JSON.stringify(emp);
+            document.querySelector("span").innerText= json;
+            localStorage.setItem("emp",json)
+        }
+ 
+       
+        window.addEventListener("load",function (){
+            let value = localStorage.getItem("emp");
+            if(value==null)
+        {
+            alert("No data is stored")
+        }
+        else{
+            let emp= JSON.parse(value);
+            document.getElementById('txtId').value=emp.empId;
+            document.getElementById('txtName').value=emp.empName;
+            document.getElementById('txtAddress').value=emp.empAddress;
+            document.getElementById('txtSalary').value=emp.empSalary;
+        }
+        let btn = document.querySelector("button")
+        btn.addEventListener("click",register)
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <h2>Employee Registration Form</h2>
+        <hr>
+        <p>
+            Enter the Id: <input type="number" id="txtId" placeholder="Enter the id">
+        </p>
+        <p>
+            Enter the Name: <input type="text" id="txtName" placeholder="Enter the Name">
+        </p>
+        <p>
+            Enter the Address: <input type="text" id="txtAddress" placeholder="Enter the address">
+        </p>
+        <p>
+            Enter the Salary: <input type="number" id="txtSalary" placeholder="Enter the Salary">
+        </p>
+        <p>
+            <button>Register</button>
+        </p>
+    </div>
+    <div>
+        <span></span>
+    </div>
+</body>
+</html>
+ 

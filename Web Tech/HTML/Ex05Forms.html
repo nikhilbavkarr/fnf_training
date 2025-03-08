@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>Forms</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="Ex01Basics.html"><h3>html basics</h3>  </a></li>
+            <li><a href="Ex02Lists.html"> <h3>List page</h3> </a></li>
+            <li><a href="Ex03Tables.html"> <h3>Tables page </h3></a></li>
+            <li><a href="Ex04Images.html"> <h3>Image page</h3></a></li>
+            <li><a href="Ex05Forms.html"> <h3>current page</h3></a></li>
+            <li><a href="Ex06Media.html"> <h3>Media page</h3></a></li>
+        </ul>
+    </nav>
+    <h1 class="jumbo">Forms</h1>
+</body>
+<form>
+    <h1>Student Registration Form</h1>
+    <hr>
+    <p><input type="text" placeholder="Enter ur Name" required/></p>
+    <p><input type="email" placeholder="Enter ur Email"/></p>
+    <p><input type="date" placeholder="Date of birth" /></p>
+    <p>
+        Select the Home City:
+        <datalist id="dtCities">
+            <option>Banglore</option>
+            <option>Belgaum</option>
+            <option>Gao</option>
+            <option>Pune</option>
+            <option>Mumbai</option>
+        </datalist>
+        <input list="dtCities" placeholder="Enter ur City"/>
+    </p>
+    <p>
+        Enter the Gender:
+        <input type="radio" name="rdGender" id="rdGender"/>Male
+        <input type="radio" name="rdGender" id="rdGender"/>Female
+        <input type="radio" name="rdGender" id="rdGender"/>Others
+    </p>
+    <p>
+        Enter the Expected Salary:
+        <input type="number" step="5" min="30000" max="1000000" placeholder="Salary"/>
+    </p>
+    <p>
+        Enter your height :
+        <input type="range" step="0.1" min="4" max="8"/>
+    </p>
+    <p>
+        Change Background Color :
+        <input type="color" placeholder="Color"/>
+    </p>
+    <input type="submit" value="Register"/>
+</form>
+</html>
